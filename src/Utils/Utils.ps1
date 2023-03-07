@@ -1,28 +1,29 @@
-choco install -y "1password
-\ 7zip
-\ authy-desktop
-\ copyq
-\ Firefox
-\ foxitreader
-\ git
-\ GoogleChrome
-\ googledrive
-\ lightshot
-\ microsip
-\ netfx
-\ obs-studio
-\ obsidian
-\ paint.net
-\ powertoys
-\ qbittorrent
-\ safari
-\ slack
-\ spotify
-\ sublimetext4
-\ telegram
-\ teracopy
-\ vlc
-\ vscode
-\ warp
-\ wireshark
-\ xnviewmp";
+# Ugly hack but I'm out of time.
+choco install -y "1password";
+choco install -y "7zip";
+choco install -y "authy-desktop";
+choco install -y "copyq";
+choco install -y "Firefox";
+choco install -y "foxitreader";
+choco install -y "git";
+choco install -y "GoogleChrome";
+choco install -y "googledrive";
+choco install -y "lightshot";
+choco install -y "microsip";
+choco install -y "netfx";
+choco install -y "obs-studio";
+choco install -y "obsidian";
+choco install -y "paint.net";
+choco install -y "powertoys";
+choco install -y "qbittorrent";
+choco install -y "safari";
+choco install -y "slack";
+choco install -y "spotify";
+choco install -y "sublimetext4";
+choco install -y "telegram";
+choco install -y "teracopy";
+choco install -y "vlc";
+choco install -y "vscode";
+choco install -y "warp";
+choco install -y "wireshark";
+choco install -y "xnviewmp";

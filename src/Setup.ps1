@@ -1,4 +1,4 @@
-$GitHubRepositoryAuthor = "JMOrbegoso";
+$GitHubRepositoryAuthor = "LoupX";
 $GitHubRepositoryName = "Dotfiles-for-Windows-11";
 $DotfilesFolder = Join-Path -Path $HOME -ChildPath ".dotfiles";
 $DotfilesWorkFolder = Join-Path -Path $DotfilesFolder -ChildPath "${GitHubRepositoryName}-main" | Join-Path -ChildPath "src";

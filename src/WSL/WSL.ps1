@@ -47,16 +47,12 @@ function Install-VSCode-Extensions-In-WSL {
   wsl code --install-extension rangav.vscode-thunder-client;
 }
 
-function Install-Volta-In-Ubuntu {
-  $DotfilesVoltaInstallerPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "volta.sh";
+function Install-ubuntu-kernell {
+  $ubuntuKernelPath = https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
-  Invoke-WebRequest -o $DotfilesVoltaInstallerPath https://get.volta.sh;
+  Invoke-WebRequest -Uri $ubuntuKernelPath -Outfile c:\temp\wsl_update_x64.msi
 
-  $WslVoltaInstallerPath = wsl wslpath $DotfilesVoltaInstallerPath.Replace("\", "\\");
-
-  Write-Host "Installing Volta in Ubuntu:" -ForegroundColor "Green";
-  
-  wsl bash $WslVoltaInstallerPath;
+  start /wait msiexec /i C:\temp\Firefox.msi /quiet
 }
 
 function Install-Nodejs-Packages-In-Ubuntu {
@@ -77,58 +73,6 @@ function Install-Nodejs-Packages-In-Ubuntu {
   
   Write-Host "Installing NestJS CLI in Ubuntu:" -ForegroundColor "Green";
   wsl ~/.volta/bin/volta install @nestjs/cli;
-}
-
-function Install-Golang-In-Ubuntu {
-  Write-Host "Installing Golang in Ubuntu:" -ForegroundColor "Green";
-  wsl sudo apt install --yes --no-install-recommends golang-go;
-}
-
-function Install-Hugo-In-Ubuntu {
-  $HugoReleasesUri = "https://api.github.com/repos/gohugoio/hugo/releases";
-  $DownloadHugo = $FALSE;
-
-  Write-Host "Checking the latest version of Hugo:" -ForegroundColor "Green";
-  $HugoLastVersion = (Invoke-WebRequest $HugoReleasesUri | ConvertFrom-Json)[0].tag_name.Replace("v", "");
-  Write-Host "Latest Hugo version is ${HugoLastVersion}" -ForegroundColor "Green";
-
-  $HugoDownloadUri = "https://github.com/gohugoio/hugo/releases/download/v${HugoLastVersion}/hugo_${HugoLastVersion}_Linux-64bit.deb";
-  Write-Host "Download url is ${HugoDownloadUri}" -ForegroundColor "Green";
-
-  $DotfilesHugoInstallerPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "hugo-installer-${HugoLastVersion}.deb";
-
-  if (-not (wsl hugo version)) {
-    $DownloadHugo = $TRUE;
-    Write-Host "Hugo is not installed in Ubuntu." -ForegroundColor "Green";
-  }
-  else {
-    $InstalledHugoFullVersion = wsl hugo version;
-    $InstalledHugoFullVersion -match "(\d\.[\d]+\.\d)";
-    $InstalledHugoVersion = $Matches[1];
-
-    Write-Host "Installed Hugo version is ${InstalledHugoVersion}." -ForegroundColor "Green";
-
-    if (-not ($InstalledHugoVersion -ge $HugoLastVersion)) {
-      $DownloadHugo = $TRUE;
-      Write-Host "Hugo must be updated." -ForegroundColor "Green";
-    }
-  }
-
-  if ($DownloadHugo) {
-    if (-not (Test-Path $DotfilesHugoInstallerPath)) {
-      Write-Host "Downloading Hugo installer:" -ForegroundColor "Green";
-      Invoke-WebRequest $HugoDownloadUri -O $DotfilesHugoInstallerPath;
-    }
-
-    $WslHugoInstallerPath = wsl wslpath $DotfilesHugoInstallerPath.Replace("\", "\\");
-
-    Write-Host "Installing Hugo in Ubuntu:" -ForegroundColor "Green";
-    wsl sudo dpkg -i $WslHugoInstallerPath;
-    wsl sudo apt install -f $WslHugoInstallerPath;
-  }
-  else {
-    Write-Host "No need to update Hugo in Ubuntu." -ForegroundColor "Green";
-  }
 }
 
 function Install-Plug-Vim-In-Ubuntu {
@@ -242,6 +186,7 @@ function Set-Zsh-As-Default-In-Ubuntu {
   # Change just for a user: sudo chsh -s $WslZshPath $USER_NAME;
 }
 
+Install-ubuntu-kernell
 choco install -y "wsl2" --params "/Version:2 /Retry:true";
 choco install -y "wsl-ubuntu-2004" --params "/InstallRoot:true" --execution-timeout 3600;
 
@@ -261,11 +206,7 @@ Set-Git-Configuration-In-Ubuntu;
 
 Install-VSCode-Extensions-In-WSL;
 
-# Install-Volta-In-Ubuntu;
-# Install-Nodejs-Packages-In-Ubuntu;
-
-# Install-Golang-In-Ubuntu;
-# Install-Hugo-In-Ubuntu;
+Install-Nodejs-Packages-In-Ubuntu;
 
 Install-Plug-Vim-In-Ubuntu;
 Copy-Initial-Vimrc-In-Ubuntu;
