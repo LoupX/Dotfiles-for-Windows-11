@@ -261,11 +261,11 @@ Set-Git-Configuration-In-Ubuntu;
 
 Install-VSCode-Extensions-In-WSL;
 
-Install-Volta-In-Ubuntu;
-Install-Nodejs-Packages-In-Ubuntu;
+# Install-Volta-In-Ubuntu;
+# Install-Nodejs-Packages-In-Ubuntu;
 
-Install-Golang-In-Ubuntu;
-Install-Hugo-In-Ubuntu;
+# Install-Golang-In-Ubuntu;
+# Install-Hugo-In-Ubuntu;
 
 Install-Plug-Vim-In-Ubuntu;
 Copy-Initial-Vimrc-In-Ubuntu;
