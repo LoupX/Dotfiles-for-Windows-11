@@ -13,7 +13,7 @@ $GitUserName = Read-Host -Prompt "Input your Git user name here";
 
 $GitUserEmail = Read-Host -Prompt "Input your Git user email here";
 
-$Advanced = Read-Host -Prompt "Do you want to continue installing?? y/n";
+$AdvancedCfg = Read-Host -Prompt "Do you want to continue installing?? y/n";
 
 $ValidDisks = Get-PSDrive -PSProvider "FileSystem" | Select-Object -ExpandProperty "Root";
 do {

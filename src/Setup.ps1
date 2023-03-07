@@ -50,7 +50,7 @@ Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Utils" | Join
 
 # After this point, all may be optional
 
-if( $Advanced -eq 'y'){ 
+if( $AdvancedCfg -eq 'y'){ 
   Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Fonts" | Join-Path -ChildPath "Fonts.ps1");
   Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "GDrive" | Join-Path -ChildPath "GDrive.ps1");
   Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Git" | Join-Path -ChildPath "Git.ps1");
