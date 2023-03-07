@@ -48,11 +48,9 @@ function Install-VSCode-Extensions-In-WSL {
 }
 
 function Install-ubuntu-kernell {
-  $ubuntuKernelPath = https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
-
-  Invoke-WebRequest -Uri $ubuntuKernelPath -Outfile c:\temp\wsl_update_x64.msi
-
-  start /wait msiexec /i C:\temp\Firefox.msi /quiet
+  $ubuntuKernelPath = "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
+  Invoke-WebRequest -Uri $ubuntuKernelPath -Outfile C:\wsl_update_x64.msi
+  Start-Process msiexec.exe -Wait -ArgumentList '/I C:\wsl_update_x64.msi /quiet'
 }
 
 function Install-Nodejs-Packages-In-Ubuntu {
