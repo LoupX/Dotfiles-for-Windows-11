@@ -104,10 +104,10 @@ function Set-Power-Configuration {
 
   # Set sleep timeout (in minutes / 0: never)
   powercfg -change "standby-timeout-ac" 0;
-  powercfg -change "standby-timeout-dc" 0;
+  powercfg -change "standby-timeout-dc" 20;
 
   # Set turn off screen timeout (in minutes / 0: never)
-  powercfg -change "monitor-timeout-ac" 10;
+  powercfg -change "monitor-timeout-ac" 0;
   powercfg -change "monitor-timeout-dc" 10;
 
   # Set turn off screen timeout on lock screen (in seconds / 0: never)
