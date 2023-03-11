@@ -132,6 +132,26 @@ function Set-Custom-Regional-Format {
   Write-Host "Regional format successfully updated." -ForegroundColor "Green";
 }
 
+function Set-Time-Zone{
+  Set-Timezone -Name "Central Standard Time (Mexico)" -PassThru;
+}
+
+function Remove-Unused-Features{
+  
+  Write-Host "Removing unused features:" -ForegroundColor "Green";
+  Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchBoxTaskbarMode -Value 0 -Type DWord -Force;
+  Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarDa -Value 0 -Type DWord -Force;
+  Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarMn -Value 0 -Type DWord -Force;
+  Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowTaskViewButton -Value 0 -Type DWord -Force;
+# Hide Recent used files
+
+  Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer -Name ShowRecent -Value 0 -Type DWord -Force;
+  Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name Start_TrackDocs -Value 0 -Type DWord -Force;
+
+  # Change value below to 0 to left alignment 
+  Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarAl -Value 1 -Type DWord -Force;
+}
+
 function Rename-PC {
   if ($env:COMPUTERNAME -ne $Config.ComputerName) {
     Write-Host "Renaming PC:" -ForegroundColor "Green";
@@ -164,4 +184,6 @@ Set-SetAsBackground-To-Extended-ContextMenu;
 Disable-RecentlyOpenedItems-From-JumpList;
 Set-Power-Configuration;
 Set-Custom-Regional-Format;
+Set-Time-Zone;
+Remove-Unused-Features;
 Rename-PC;
